@@ -77,7 +77,98 @@ Retreive all incidents stored in database
   }
 ]
 ```
+
 **Testing with curl command**:
 ```bash
 curl -X GET http://localhost:5000/api/incidents
 ```
+
+**Testing with Postman**:
+1. Open Postman.
+2. Set the request type to GET.
+3. Enter the URL http://localhost:5000/api/incidents.
+4. Click Send
+
+### POST /api/incidents
+Log a new incident to the database. The title, description, and severity fields are required.
+
+**Request Body**:
+```json
+{
+  "title": "New Incident Title",
+  "description": "Detailed description here.",
+  "severity": "Medium"
+}
+```
+
+**Response Example**:
+```json
+{
+  "id": 3,
+  "title": "New Incident Title",
+  "description": "Detailed description here.",
+  "severity": "Medium",
+  "reported_at": "2025-04-02T18:00:00Z"
+}
+```
+
+**Testing with curl command**:
+```bash
+curl -X POST http://localhost:5000/api/incidents \
+-H "Content-Type: application/json" \
+-d '{"title": "New Incident Title", "description": "Detailed description here.", "severity": "Medium"}'
+```
+
+**Testing with Postman**:
+1. Open Postman.
+2. Set the request type to POST.
+3. Enter the URL http://localhost:5000/api/incidents.
+4. Under the Body tab, select raw and choose JSON.
+5. Paste the JSON payload into the body.
+6. Click Send
+
+### GET /api/incidents/:id
+Retreive a specific incident by its ID.
+
+**Response Example**:
+```json
+{
+  "id": 1,
+  "title": "Autonomus car failed to detect person.",
+  "description": "An autonomous vehicle's vision model failed to detect a person crossing the road in low light conditions.",
+  "severity": "High",
+  "reported_at": "2025-04-02T18:00:00Z"
+}
+```
+
+**Testing with curl command**:
+```bash
+curl -X GET http://localhost:5000/api/incidents/1
+```
+
+**Testing with Postman**:
+1. Open Postman.
+2. Set the request type to GET.
+3. Enter the URL http://localhost:5000/api/incidents/id (replace id with the desired ID)
+4. Click Send
+
+### DELETE /api/incidents/:id
+Delete the incident with the specified ID from the database.
+
+**Response Example**:
+```json
+{
+  "message": "Incident deleted successfully."
+}
+```
+
+**Testing with curl command**:
+```bash
+curl -X DELETE http://localhost:5000/api/incidents/1
+```
+
+**Testing with Postman**:
+1. Open Postman.
+2. Set the request type to DELETE.
+3. Enter the URL http://localhost:5000/api/incidents/id (replace id with the desired ID)
+4. Click Send
